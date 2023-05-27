@@ -94,13 +94,9 @@ function SignIn(props) {
               {props.login.loginLoader ? "loading...." : "Sign In"}
             </Button>
             <Snackbar
-              open={
-                !!props?.login?.errorMessage || !!props?.login?.successMessage
-              }
+              open={!!props?.login?.message}
               autoHideDuration={6000}
-              message={
-                props?.login?.errorMessage || props?.login?.successMessage
-              }
+              message={props?.login?.message}
             />
           </Box>
         </Box>

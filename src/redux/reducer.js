@@ -4,8 +4,7 @@ export const initialState = {
   isLoggedIn: false,
   loginLoader: false,
   userInfo: {},
-  successMessage: "",
-  errorMessage: "",
+  message: "",
 };
 export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -20,7 +19,7 @@ export const loginReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         loginLoader: false,
-        successMessage: "SuccessFully Logged in",
+        message: "SuccessFully Logged in!!!! relax",
         userInfo: action.payload,
       };
     case LOGIN_FAILED:
@@ -28,7 +27,7 @@ export const loginReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: false,
         loginLoader: false,
-        successMessage: "Failed to login Please try again!!",
+        message: "Failed to login Please try again later and keep calm",
       };
     default:
       return {
