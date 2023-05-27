@@ -12,6 +12,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { loginFailed, loginsuccess, requestLogin } from "./redux/action";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
 
 const defaultTheme = createTheme();
 
@@ -24,6 +27,14 @@ function SignIn(props) {
       email: data.get("email"),
       password: data.get("password"),
     });
+    props.requestLogin();
+    setTimeout(() => {
+      if (data.get("password") == "Vishal$123") {
+        props.loginsuccess({ email: data.get("email") });
+      } else {
+        props.loginFailed({ email: data.get("email") });
+      }
+    }, 4000);
   };
 
   return (
@@ -80,8 +91,17 @@ function SignIn(props) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              {props.login.loginLoader ? "loading...." : "Sign In"}
             </Button>
+            <Snackbar
+              open={
+                !!props?.login?.errorMessage || !!props?.login?.successMessage
+              }
+              autoHideDuration={6000}
+              message={
+                props?.login?.errorMessage || props?.login?.successMessage
+              }
+            />
           </Box>
         </Box>
       </Container>
